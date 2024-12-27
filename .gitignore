@@ -1,0 +1,9 @@
+.idea/
+build/
+dist/
+Check2.py
+Main.py
+*.pcsave
+*.json
+*.spec
+设计思路.txt
