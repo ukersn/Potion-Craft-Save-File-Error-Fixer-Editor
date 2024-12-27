@@ -87,15 +87,18 @@ def main():
     if len(sys.argv) == 1:
         while not os.path.isfile(find_file_with_similar_name(file_path)):
             file_path = input("请输入存档文件路径 (Enter the save file path): ").strip().strip('"')
+            file_path = find_file_with_similar_name(file_path).strip('"')
             if not os.path.isfile(find_file_with_similar_name(file_path)):
                 print("文件不存在，请重新输入。(File does not exist, please enter again.)")
     else:
-        file_path = sys.argv[1].strip('"')
+        file_path = find_file_with_similar_name(sys.argv[1]).strip('"')
+
+
 
     fix_choice = input(
         "你是想修复这个游戏存档么？(如果是的话输入Y，否则进入存档字段的修改模式) Do you want to fix this game save? (Enter Y to fix, or enter any other key to modify save fields): ").strip().lower()
     if fix_choice == 'y':
-        fixMode1(find_file_with_similar_name(file_path))
+        fixMode1(file_path)
         return
 
     try:
@@ -142,6 +145,15 @@ def fixMode1(file_path):
     try:
         json_content1, json_content2, _, _ = process_save_file(file_path)
 
+
+        #处理因为左右键同时点击导航按钮而切到未解锁房间的存档
+        if 'savePool' in json_content1:
+            json_content2['savePool'] = 21
+            print("已重置存档保存标记 savePool = 1 (Reset save file marker: savePool = 1)")
+        else:
+            print("未找到字段: savePool (Field not found: savePool)")
+            return
+
         #处理因为左右键同时点击导航按钮而切到未解锁房间的存档
         if 'currentRoom' in json_content2:
             json_content2['currentRoom'] = 1
@@ -162,8 +174,8 @@ def fixMode1(file_path):
         if not items_from_inventory:
             print("未找到 itemsFromInventory 字段 (itemsFromInventory field not found)")
             return
-
-        modified_count = 0
+        fixed_count = 0 #BuildZone被篡改的物品计数
+        modified_count = 0 #被卡到未解锁房间的物品计数
         for item in items_from_inventory:
             position = item.get('position', {})
             x = position.get('x', 0)
@@ -196,11 +208,29 @@ def fixMode1(file_path):
                 modified_count += 1
                 print(f"物品位置已修改 (Item position modified): typeName = {item.get('typeName')}")
 
+            data = item.get('data', '')
+            modified = False
+            if '"buildZoneRoomIndex\":4' in data and 'BuildableItem Foreground Chests' in data:
+                data = data.replace('BuildableItem Foreground Chests', 'Background Shelves')
+                modified = True
+            elif '"buildZoneRoomIndex\":4' in data and  'BuildableItem Foreground Shelves' in data:
+                data = data.replace('BuildableItem Foreground Shelves', 'Foreground Chests')
+                modified = True
+
+            if modified:
+                item['data'] = data
+                fixed_count += 1
+                print(f"物品BuildZone已修复 (Item BuildZone fixed): inventoryItemName = {item.get('inventoryItemName')}")
+
         if modified_count > 0:
             print(f"共修改了 {modified_count} 个物品的位置 (Modified positions of {modified_count} items)")
         else:
             print("没有需要修改的物品 (No items needed modification)")
 
+        if fixed_count > 0:
+            print(f"共修复了 {fixed_count} 个物品的BuildZone (Fixed BuildZone of {fixed_count} items in total)")
+        else:
+            print("没有需要修复BuildZone的物品 (No items needed BuildZone fixing)")
         print("存档错误尝试修复完成。(Save file error fix attempt completed.)")
 
         # 保存修改后的内容
@@ -284,3 +314,34 @@ if __name__ == "__main__":
         main()
     print("\n按任意键继续...(Press any key to continue...)")
     input()
+
+
+"""我靠，那个坏档，我终于是有点头绪了。
+
+有这些BuildZone，用来放家具的东西：
+一个房间被分为了前后两个建筑区域(就像图片的图层)
+Foreground Chests   房间的前景区域，比如桌子、床之类的玩意。
+Background Shelves  房间的背景区域，比如架子，奖杯这些东西。
+
+在同一个区域里的东西不能互相碰撞，也就是床跟桌子没办法叠在一起放，但前景跟背景区域就不冲突，也就是意味着像各种架子和奖杯什么的可以显示在桌子、床这些前景建筑的后面。
+如图所示：
+
+
+
+然后我检查那些坏档的时候，发现像床什么的物品，有的data数据的BuildZone变成了
+BuildableItem Foreground Shelves
+BuildableItem Foreground Chests
+
+这两个另类的玩意，这两个玩意我找遍了我的存档都没见过有东西使用这个BuildZone。  所以怀疑是保存的时候发生什么，使得一些物品的BuildZone转变成那两个另类的玩意。
+
+理论上我现在要做的就是找出存档中这些被转变成这两个另类的BuildZone的物品，区分并修改它是放在正常的前景还是背景，然后保存。就可以了。 不过还有一些其他参数我有点看不懂，就先这样写试试
+
+值得一提的是，所有这种错误BuildZone的变化都发生在卧室。不知道游戏开发者又在搞什么东西
+
+
+
+尝试后：
+BuildableItem Foreground Chests -> Background Shelves
+BuildableItem Foreground Shelves -> Foreground Chests
+仅在卧室有用，放其他地方要报错的，因为其他地方真的有这个BuildZone
+"""
