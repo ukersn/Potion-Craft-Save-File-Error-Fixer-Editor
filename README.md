@@ -7,11 +7,13 @@ This is a software for manipulating Potion Craft game save files. It has the fol
 1. It attempts to fix save files that produce the following errors:
    ![Save Error Image 1](image/error1.jpg)
    ![Save Error Image 2](image/error2.jpg)
-   ![Save Error Image 2](image/error3.jpg)
+   ![Save Error Image 3](image/error3.jpg)
+   ![Save Error Image 4](image/error4.jpg)
 
    It makes the following attempts on the game save file:
    a. Reset the player's current room view back to the laboratory
    b. Reset the coordinates of items located in rooms not unlocked by the player or outside all rooms back to the bedroom
+   c. Check if the item's BuildZone has been incorrectly saved and correct it
 
 2. Decode game saves, allowing you to manually view and modify data in the game save.
 3. Encode game saves, allowing you to encode modified decoded game saves back into a format that the game can load.
@@ -78,10 +80,12 @@ Use command line for operations.
    ![存档错误图片1](image/error1.jpg)
    ![存档错误图片2](image/error2.jpg)
    ![存档错误图片3](image/error3.jpg)
-
+   ![存档错误图片4](image/error4.jpg)
+   
    它会对游戏存档文件做以下尝试：
    a. 将玩家目前的房间视角重置回实验室
    b. 将位于玩家未解锁房间或所有房间外的道具重置坐标回到卧室
+   c. 检查物品所在BuildZone是否被错误的保存并进行修正
 
 2. 解码游戏存档，这将允许你手动对游戏存档中的数据进行查看和修改。
 3. 编码游戏存档，这将允许你将修改后的解码的游戏存档编码回游戏可以加载的存档。
