@@ -52,6 +52,8 @@ This way, you can try to repair your save.
 
 At this point, you can try launching the game to see if your save has been successfully repaired. If successful, continue playing the game.
 
+**If after the repair prompt ends, loading the save file and entering the game still results in the same problem, it's possible that Steam's cloud save has overwritten the repaired save file. In this case, try temporarily disabling Steam cloud saves, then repair the save file again, and then enter the game.**
+
 ## Additional Features (If you want to do more than just repair game saves)
 
 Use command line for operations.
@@ -123,6 +125,8 @@ Potion Craft的存档底层是JSON格式，其被套了一层XOR加密之后再�
 这样来尝试修复我的存档。
 
 到这一步，你就可以尝试启动游戏看看你的存档被修复成功了没，如果成功了，继续玩游戏去吧。
+
+**如果提示修复结束后，加载存档进入游戏还是同样的问题，则有可能是Steam的云存档覆盖了修复后的存档，这种情况下，尝试暂时关闭Steam云存档，然后再次修复，然后进入游戏。**
 
 ## 其他额外功能(如果你不止于修复游戏存档的话)
 
