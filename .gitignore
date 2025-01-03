@@ -1,9 +1,13 @@
 .idea/
 build/
 dist/
+Editor.build/
+Editor.dist/
 Check2.py
 Main.py
 *.pcsave
 *.json
 *.spec
 设计思路.txt
+file_version_info.txt
+Editor.exe

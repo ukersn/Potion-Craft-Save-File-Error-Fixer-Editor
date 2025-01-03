@@ -28,8 +28,12 @@ I wrote a Python script to decrypt game saves, manipulate data in the game saves
 ## Usage Instructions
 
 1. Windows users, please download the software packaged in Release to get Editor.exe
-2. Find your save file, typically located in: C:\Users\Username\AppData\LocalLow\niceplay games\Potion Craft\SavesSteam
+2. Find your save file, typically located in: C:\Users\[Username]\AppData\LocalLow\niceplay games\Potion Craft\SavesSteam
+   Or by opening the game save folder this way:
+   In the game, you can find a button to open the save file folder on the screen where you load saved games.
+   ![save file folder open button 1](image/so.png)
    You will see files with .pcsave extension, such as ErrorAutoSave — 2024.12.27 02.53.31.647 UTC - Day 2 - 0h 1m.pcsave. These are your save files, with the most recently modified file usually being your latest save.
+   
 3. To repair a save file:
    Drag the save file onto the Editor.exe file in the file explorer. Editor.exe should then get the file path and start attempting to repair the save.
    After the save repair is complete, you can close it and open the game to re-enter the repaired save.
@@ -46,7 +50,7 @@ If I downloaded Editor.exe to F:\downloads\
 I would enter the following command in the system command line:
 `cd /D F:\downloads\`
 Then enter (or enter "Editor " and try to drag the game save file to the system command line window):
-`Editor "C:\Users\Username\AppData\LocalLow\niceplay games\Potion Craft\SavesSteam\ErrorAutoSave — 2024.12.27 02.53.31.647 UTC - Day 2 - 0h 1m.pcsave"`
+`Editor "C:\Users\[Username]\AppData\LocalLow\niceplay games\Potion Craft\SavesSteam\ErrorAutoSave — 2024.12.27 02.53.31.647 UTC - Day 2 - 0h 1m.pcsave"`
 
 This way, you can try to repair your save.
 
@@ -102,8 +106,12 @@ Potion Craft的存档底层是JSON格式，其被套了一层XOR加密之后再�
 ## 使用说明
 
 1. Windows用户请下载Release打包好的软件，得到Editor.exe
-2. 找到你的存档文件，通常目录是在：C:\Users\用户名\AppData\LocalLow\niceplay games\Potion Craft\SavesSteam 中
+2. 找到你的存档文件，通常目录是在：C:\Users\[用户名]\AppData\LocalLow\niceplay games\Potion Craft\SavesSteam 中。
+   或者你可以通过这个方法打开存档文件夹：
+   在游戏中，你可以在载入游戏的界面找到打开从存档文件夹的按钮。
+   ![save file folder open button 1](image/so.png)
    你会看到诸如ErrorAutoSave — 2024.12.27 02.53.31.647 UTC - Day 2 - 0h 1m.pcsave 等以pcsave为文件后缀的文件，他们就是你的存档文件，文件修改日期最新的一般就是你最近一次保存的文件。
+   
 3. 对存档文件进行修复：
    在文件浏览器中将存档文件拖动到Editor.exe文件上，此时Editor.exe应该获得文件路径并启动尝试修复存档，
    等待存档修复完成后，你就可以关闭它并打开游戏重新进入被修复完成后的存档。
@@ -120,7 +128,7 @@ Potion Craft的存档底层是JSON格式，其被套了一层XOR加密之后再�
 我会在系统的命令行输入以下指令：
 `cd /D F:\downloads\`
 然后再输入(或者输入"Editor " 然后尝试将游戏存档文件拖动到系统的命令行窗口)：
-`Editor "C:\Users\用户名\AppData\LocalLow\niceplay games\Potion Craft\SavesSteam\ErrorAutoSave — 2024.12.27 02.53.31.647 UTC - Day 2 - 0h 1m.pcsave"`
+`Editor "C:\Users\[用户名]\AppData\LocalLow\niceplay games\Potion Craft\SavesSteam\ErrorAutoSave — 2024.12.27 02.53.31.647 UTC - Day 2 - 0h 1m.pcsave"`
 
 这样来尝试修复我的存档。
 
