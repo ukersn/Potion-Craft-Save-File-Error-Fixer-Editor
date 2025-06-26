@@ -86,7 +86,7 @@ Use command line for operations.
 
 
 # My Other Projects
-[Recipe Book Button Fix][0]: Used to fix a bug where, after playing the game for a long time, the clickable area of the recipe book button becomes larger, overlapping other buttons.
+~~[Recipe Book Button Fix][1]: Used to fix a bug where, after playing the game for a long time, the clickable area of the recipe book button becomes larger, overlapping other buttons.~~(This bug has been fixed by the official team in version v2.0.2).
 
 [Auto Garden][1] : Tired of the daily routine of watering plants and harvesting vegetables? Auto Garden is here to help. It can perform all the harvesting and watering actions in your garden for you.
 
@@ -175,7 +175,7 @@ Potion Craft的存档底层是JSON格式，其被套了一层XOR加密之后再�
 
 
 # 我的其他项目
-[配方书按钮修复][0] :用于修复游戏游玩久后配方书按钮可点击区域变大，从而覆盖其他按钮的bug
+~~[配方书按钮修复][1] :用于修复游戏游玩久后配方书按钮可点击区域变大，从而覆盖其他按钮的bug~~(这个bug已经在v2.0.2版本被官方修复)
 
 [自动花园][1] : 厌倦每天日常浇花和收菜的生活了么？自动花园来了，它可以帮您完成花园中所有的收获和浇水的动作。
 
